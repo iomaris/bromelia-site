@@ -1,0 +1,11 @@
+{
+  "name": "bromelia-financeiro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import ./test/fake-blobs.mjs --test test/api.test.mjs"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.7"
+  }
+}
