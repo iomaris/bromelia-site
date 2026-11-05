@@ -1,8 +1,8 @@
-import { gravar, tokenValido, json } from "../lib/core.mjs";
+import { protegido, gravar, tokenValido, json } from "../lib/core.mjs";
 
 const CAMINHO = /^(lancamentos|meses)\/[A-Za-z0-9_-]{1,64}$|^config\/plano$/;
 
-export async function POST(req) {
+export const POST = protegido(async function (req) {
   if (!tokenValido(req)) return json({ erro: "Sessão expirada. Entre novamente." }, 401);
   let corpo;
   try { corpo = await req.json(); } catch { return json({ erro: "Requisição inválida" }, 400); }
@@ -12,11 +12,6 @@ export async function POST(req) {
     return json({ erro: "Dados inválidos" }, 400);
   const [col, id] = path.split("/");
   if (col === "config" && op === "delete") return json({ erro: "Operação inválida" }, 400);
-  try {
-    await gravar(op, col, id, data);
-  } catch (e) {
-    console.error(e);
-    return json({ erro: "Não foi possível gravar agora, tente de novo" }, 503);
-  }
+  await gravar(op, col, id, data);
   return json({ ok: true });
-}
+});

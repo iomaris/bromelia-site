@@ -364,7 +364,7 @@ summary .chip{margin-left:4px}
   const novoId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   async function carregar(){
     const v=versao, r=await fetch('/api/dados',{cache:'no-store'});
-    if(!r.ok) throw {code:'unavailable',message:'servidor indisponível ('+r.status+')'};
+    if(!r.ok){let m='servidor indisponível ('+r.status+')';try{m=(await r.json()).erro||m}catch(e){} throw {code:'unavailable',message:m};}
     const novo=await r.json(); if(v!==versao) return; // houve gravação durante a leitura: descarta
     D=novo; notificar();
   }
@@ -409,7 +409,7 @@ summary .chip{margin-left:4px}
   window.fbLogin=async(usuario,senha)=>{
     const r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({usuario,senha})});
     if(r.status===401) return 'Usuário ou senha incorretos.';
-    if(!r.ok) return 'Não foi possível entrar agora ('+r.status+').';
+    if(!r.ok){let m='Não foi possível entrar agora ('+r.status+').';try{m=(await r.json()).erro||m}catch(e){} return m;}
     try{localStorage.setItem(TK,JSON.stringify(await r.json()));}catch(e){return 'O navegador bloqueou o salvamento da sessão.';}
     return '';
   };
