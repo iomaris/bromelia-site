@@ -1,6 +1,6 @@
-import { senhaConfere, criarToken, json } from "../../lib/core.mjs";
+import { senhaConfere, criarToken, json } from "../lib/core.mjs";
 
-export default async (req) => {
+export async function POST(req) {
   let corpo;
   try { corpo = await req.json(); } catch { return json({ erro: "Requisição inválida" }, 400); }
   const { usuario = "", senha = "" } = corpo || {};
@@ -11,6 +11,4 @@ export default async (req) => {
     return json({ erro: "Usuário ou senha incorretos" }, 401);
   }
   return json(criarToken());
-};
-
-export const config = { path: "/api/login", method: "POST" };
+}

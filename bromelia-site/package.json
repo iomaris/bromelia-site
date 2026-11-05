@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --import ./test/fake-blobs.mjs --test test/api.test.mjs"
+    "test": "node --import ./test/fake-redis.mjs --test test/api.test.mjs",
+    "local": "node --import ./test/fake-redis.mjs test/servidor-local.mjs"
   },
   "dependencies": {
-    "@netlify/blobs": "^11.1.7"
+    "@upstash/redis": "^1.41.0"
   }
 }
