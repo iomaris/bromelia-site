@@ -12,7 +12,6 @@ const cmds = {
   async hgetall(k) { const m = hs.get(k); return m && m.size ? Object.fromEntries([...m].map(([f, v]) => [f, clone(v)])) : null; },
 };
 export class Redis {
-  static fromEnv() { return new Redis(); }
   constructor() { Object.assign(this, cmds); }
   pipeline() {
     const fila = [];
