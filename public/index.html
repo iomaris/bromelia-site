@@ -90,12 +90,13 @@ main{padding-block:28px 40px;display:grid;gap:var(--dp-spacing-cluster-gap)}
 /* Telas largas: navegação em barra lateral fixa à esquerda */
 @media (min-width:1101px){
   header{position:fixed;top:0;left:0;bottom:0;width:248px;border-bottom:0;border-right:var(--dp-border-hairline) solid var(--dp-color-line);overflow-y:auto}
-  header .wrap{max-width:none;height:100%;display:flex;flex-direction:column;padding:20px 14px}
+  header .wrap{max-width:none;height:100%;display:flex;flex-direction:column;padding:0 14px 20px}
   .top{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:18px;padding:0}
-  .brand{margin:0 0 6px;flex-direction:column;align-items:flex-start;gap:10px}
-  .brand div{padding-left:0;border-left:0}
+  .brand{margin:0 -14px;padding:0 14px;height:68px;gap:10px;border-bottom:var(--dp-border-hairline) solid var(--dp-color-line)}
+  .brand img{height:26px}
+  .brand div{padding-left:10px}.brand b{font-size:13px;white-space:nowrap}
   .acoes-top{position:fixed;top:0;left:248px;right:0;z-index:5;height:68px;display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:0 32px;background:var(--dp-color-ground);border-bottom:var(--dp-border-hairline) solid var(--dp-color-line)}
-  nav{flex-direction:column;gap:2px;margin:22px 0 0;padding-top:18px;border-top:var(--dp-border-hairline) solid var(--dp-color-line);overflow:visible}
+  nav{flex-direction:column;gap:2px;margin:0;padding-top:18px;overflow:visible}
   nav button{text-align:left;border-bottom:0;border-left:3px solid transparent;border-radius:0 8px 8px 0;padding:11px 14px}
   nav button:hover{background:#eef3fb}
   nav button[aria-selected="true"]{border-left-color:var(--dp-color-accent);background:#eef3fb;color:var(--dp-color-accent)}
