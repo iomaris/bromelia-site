@@ -86,6 +86,21 @@ nav button{border:0;background:none;border-radius:0;padding:10px 14px;font-size:
 nav button:hover{background:none;color:var(--dp-color-ink)}
 nav button[aria-selected="true"]{color:var(--dp-color-ink);border-bottom-color:var(--dp-color-accent)}
 main{padding-block:28px 40px;display:grid;gap:var(--dp-spacing-cluster-gap)}
+/* Telas largas: navegação em barra lateral fixa à esquerda */
+@media (min-width:1101px){
+  header{position:fixed;top:0;left:0;bottom:0;width:248px;border-bottom:0;border-right:var(--dp-border-hairline) solid var(--dp-color-line);overflow-y:auto}
+  header .wrap{max-width:none;height:100%;display:flex;flex-direction:column;padding:20px 14px}
+  .top{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:18px;padding:0}
+  .brand{margin:0 0 6px;flex-direction:column;align-items:flex-start;gap:10px}
+  .brand div{padding-left:0;border-left:0}
+  .mes{order:2;gap:4px}.mes input{flex:1;min-width:0;padding:9px 6px;font-size:14px}.mes .icon{width:32px;flex:none}
+  #trocar{order:3}
+  nav{flex-direction:column;gap:2px;margin:22px 0 0;padding-top:18px;border-top:var(--dp-border-hairline) solid var(--dp-color-line);overflow:visible}
+  nav button{text-align:left;border-bottom:0;border-left:3px solid transparent;border-radius:0 8px 8px 0;padding:11px 14px}
+  nav button:hover{background:#eef3fb}
+  nav button[aria-selected="true"]{border-left-color:var(--dp-color-accent);background:#eef3fb;color:var(--dp-color-accent)}
+  main.wrap{max-width:1200px;margin-left:248px;margin-right:0;padding-left:32px;padding-right:32px}
+}
 .notice{padding:10px 14px;border:var(--dp-border-hairline) solid var(--dp-color-line);border-radius:var(--dp-radius-panel);color:var(--dp-color-ink-muted);font-size:var(--dp-typography-supporting)}
 .notice.err{color:var(--neg);border-color:var(--neg)}
 
