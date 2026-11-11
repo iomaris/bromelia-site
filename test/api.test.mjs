@@ -10,11 +10,14 @@ const entrar = async () => (await (await login(post({ usuario: "admin", senha: "
 
 test("primeira leitura traz os dados iniciais", async () => {
   const d = await ler();
-  assert.equal(Object.keys(d.lancamentos).length, 411);
+  assert.equal(Object.keys(d.lancamentos).length, 420);
   assert.equal(d.meses["2026-10"].saldoInicial, -4590.14);
   assert.equal(d.lancamentos["rec-2026-05"].valor, 72425.85, "receita de maio da planilha");
   assert.equal(d.lancamentos["rec-2026-10"].valor, 76704.67, "receita de outubro da planilha");
   assert.ok(!d.lancamentos["rec-2026-09"], "setembro já tinha receita: não ganha outra");
+  const out = Object.values(d.lancamentos).filter((l) => l.mes === "2026-10" && l.grupo !== "RECEITAS");
+  assert.equal(Math.round(out.reduce((a, l) => a + l.valor * 100, 0)), 7006021, "despesas de outubro = balancete");
+  assert.ok(out.every((l) => l.origem === "balancete"), "as de outubro da planilha saem");
   assert.ok(d.plano.grupos.length > 5);
 });
 
@@ -41,7 +44,7 @@ test("salvar: grava, exclui, valida caminho e não refaz a semente", async () =>
   const d = await ler();
   assert.equal(d.lancamentos.t2.valor, 10);
   assert.equal(d.lancamentos.imp000, undefined, "a exclusão não pode voltar com a semente");
-  assert.equal(Object.keys(d.lancamentos).length, 411);
+  assert.equal(Object.keys(d.lancamentos).length, 420);
 });
 
 test("salvar: gravações simultâneas não se perdem", async () => {
