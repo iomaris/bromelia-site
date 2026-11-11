@@ -10,6 +10,7 @@ const cmds = {
   async hset(k, o) { const m = h(k); for (const [f, v] of Object.entries(o)) m.set(f, clone(v)); return 1; },
   async hdel(k, f) { return h(k).delete(f) ? 1 : 0; },
   async hgetall(k) { const m = hs.get(k); return m && m.size ? Object.fromEntries([...m].map(([f, v]) => [f, clone(v)])) : null; },
+  async hget(k, f) { const m = hs.get(k); return m && m.has(f) ? clone(m.get(f)) : null; },
 };
 export class Redis {
   constructor() { Object.assign(this, cmds); }
